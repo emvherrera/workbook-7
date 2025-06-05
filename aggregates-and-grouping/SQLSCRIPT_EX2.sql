@@ -34,9 +34,17 @@ GROUP BY CategoryID;
 -- 8. For suppliers that provide at least 5 items to Northwind, what is the
 -- supplier ID of each supplier and the number of items they supply? You
 -- can answer this query by only looking at the Products table.
-SELECT SupplierID,COUNT(ProductID
+
+SELECT SupplierID, COUNT(*) AS NumberOfProducts
+FROM products
+GROUP BY SupplierID
+HAVING COUNT(*) >= 5
+ORDER BY SupplierID;
 
 -- 9. List the product id, product name, and inventory value (calculated by
 -- multiplying unit price by the number of units on hand). Sort the results in
 -- descending order by value. If two or more have the same value, order by
 -- product name.
+SELECT ProductID, ProductName, UnitPrice* UnitsInStock AS InventoryValue
+FROM products
+ORDER BY InventoryValue desc, ProductName asc;
